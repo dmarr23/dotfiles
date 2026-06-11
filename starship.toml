@@ -1,0 +1,58 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# ==========================================
+# PROJECT GALAXY: APEX TELEMETRY DASHBOARD
+# ==========================================
+
+format = """
+[▉](fg:#ff0000)\
+[ $directory ](bold fg:#ffffff bg:#111111)\
+[](fg:#111111 bg:#1c1c1c)\
+[ $git_branch ](bold fg:#ff0000 bg:#1c1c1c)\
+[ $git_status ](bold fg:#ff0000 bg:#1c1c1c)\
+[](fg:#1c1c1c bg:#2a2a2a)\
+[  $time ](bold fg:#777777 bg:#2a2a2a)\
+[](fg:#2a2a2a bg:#000000)\
+$cmd_duration\
+\n$character"""
+
+[directory]
+style = "bold fg:#ffffff bg:#111111"
+format = "[$path]($style)"
+truncation_length = 4
+truncation_symbol = "…/"
+
+[git_branch]
+symbol = ""
+style = "bold fg:#ff0000 bg:#1c1c1c"
+format = '[$symbol $branch]($style)'
+
+[git_status]
+style = "bold fg:#ff0000 bg:#1c1c1c"
+format = '[$all_status$ahead_behind]($style)'
+
+[time]
+disabled = false
+time_format = "%H:%M:%S.%3f" # Millisecond precision for the clock
+style = "bold fg:#777777 bg:#2a2a2a"
+format = '[$time]($style)'
+
+[cmd_duration]
+min_time = 0 # Forces the lap timer to show on every single command
+style = "bold fg:#ff0000 bg:#000000"
+format = ' [⏱ $duration]($style)'
+
+[character]
+# Forcing the strict hex code so it stays blood red, not yellow
+success_symbol = "[❯❯❯](bold fg:#ff0000)"
+error_symbol = "[XXX](bold fg:#ff0000)"
+
+# Disable the bloat
+[container]
+disabled = true
+[docker_context]
+disabled = true
+[nodejs]
+disabled = true
+[dotnet]
+disabled = true
