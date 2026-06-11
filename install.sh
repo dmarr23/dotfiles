@@ -1,10 +1,20 @@
 #!/bin/bash
 
-# Create the config directory if it doesn't exist
+# 1. Setup Starship Terminal
 mkdir -p ~/.config
-
-# Copy the starship config from this repo into the system folder
 cp starship.toml ~/.config/starship.toml
-
-# Ensure starship is hooked into bash
 echo 'eval "$(starship init bash)"' >> ~/.bashrc
+
+# 2. Force Install Personal Server-Side VS Code Extensions
+echo "Installing global VS Code extensions..."
+
+code --install-extension github.codespaces
+code --install-extension github.vscode-github-actions
+code --install-extension github.vscode-pull-request-github
+code --install-extension ms-azuretools.vscode-azurefunctions
+code --install-extension ms-azuretools.vscode-azureresourcegroups
+code --install-extension ms-azuretools.vscode-azurestaticwebapps
+code --install-extension ms-dotnettools.csharp
+code --install-extension ms-dotnettools.vscode-dotnet-runtime
+
+echo "Dotfiles installation complete!"
