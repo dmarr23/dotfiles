@@ -1,4 +1,4 @@
-# ⚡ Dan Marr: Building Innovative & Secure Solutions for Data Centers
+# ⚡ Dan Marr: Building Innovative & Secure Solutions for Enterprises
 
 > *"Real leverage doesn't come from modifying the box; it comes from designing your own from the ground up, where every component serves your purpose." — DanMarr.co*
 
