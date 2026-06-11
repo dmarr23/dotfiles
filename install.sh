@@ -1,43 +1,42 @@
 #!/bin/bash
 
-# 1. Install Starship Engine
-echo "Installing Starship terminal..."
-curl -sS https://starship.rs/install.sh | sh -s -- -y
+echo "Deploying global dotfiles architecture..."
 
-# 2. Setup Starship Configuration
+# 1. Setup Starship Configuration
 mkdir -p ~/.config
-cp starship.toml ~/.config/starship.toml
 
-# Ensure starship is hooked into bash (preventing duplicates)
+# Symlink directly to the persisted dotfiles so live edits are saved
+TARGET_FILE="/workspaces/.codespaces/.persistedshare/dotfiles/starship.toml"
+
+if [ -f "$TARGET_FILE" ]; then
+    ln -sf "$TARGET_FILE" ~/.config/starship.toml
+else
+    echo "Warning: starship.toml not found in persisted dotfiles share."
+fi
+
+# Hook starship into bash securely
 if ! grep -q 'starship init bash' ~/.bashrc; then
   echo 'eval "$(starship init bash)"' >> ~/.bashrc
 fi
 
-# 3. Force Install Personal Server-Side VS Code Extensions
-echo "Installing lean .NET and Azure VS Code extensions..."
+# 2. Force Install Global VS Code Extensions
+echo "Injecting full-stack C# and Azure extension stack..."
 
-# GitHub & Remote Core
-code --install-extension github.codespaces
-code --install-extension github.vscode-github-actions
-code --install-extension github.vscode-pull-request-github
+# Chained installation (NO background '&' so GitHub doesn't kill it prematurely)
+code \
+  --install-extension github.codespaces \
+  --install-extension github.vscode-github-actions \
+  --install-extension github.vscode-pull-request-github \
+  --install-extension ms-dotnettools.csharp \
+  --install-extension ms-dotnettools.csdevkit \
+  --install-extension ms-dotnettools.vscode-dotnet-runtime \
+  --install-extension ms-mssql.mssql \
+  --install-extension ms-mssql.data-workspace-vscode \
+  --install-extension ms-mssql.sql-database-projects-vscode \
+  --install-extension fabric.vscode-fabric \
+  --install-extension ms-azuretools.vscode-azureresourcegroups \
+  --install-extension ms-azuretools.vscode-azurestaticwebapps \
+  --install-extension ms-azuretools.vscode-azurefunctions \
+  --install-extension humao.rest-client
 
-# .NET & C# Development
-code --install-extension ms-dotnettools.csharp
-code --install-extension ms-dotnettools.csdevkit
-code --install-extension ms-dotnettools.vscode-dotnet-runtime
-
-# Database (SQL & Fabric)
-code --install-extension ms-mssql.mssql
-code --install-extension ms-mssql.data-workspace-vscode
-code --install-extension ms-mssql.sql-database-projects-vscode
-code --install-extension fabric.vscode-fabric
-
-# Azure Deployment & Management
-code --install-extension ms-azuretools.vscode-azureresourcegroups
-code --install-extension ms-azuretools.vscode-azurestaticwebapps
-code --install-extension ms-azuretools.vscode-azurefunctions
-
-# API Testing
-code --install-extension humao.rest-client
-
-echo "Dotfiles installation complete! Environment optimized."
+echo "Dotfiles deployed. Extensions installed."
