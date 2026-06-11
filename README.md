@@ -19,7 +19,7 @@ Currently architecting **Project Galaxy**—a modular, enterprise grade project 
 ### 🧠 The Philosophy: Breadcrumbs & Telemetry
 Whether I am analyzing telemetry or performing load calcs, my approach is the same: *Slow is smooth, and smooth is fast.*
 
-I build systems like I build cars—with intentional design, relentless prototyping, and a modular architecture where every piece is required, and nothing is wasted. 
+I build systems like I build cars, with intentional design, relentless prototyping, and a modular architecture where every piece is required, and nothing is wasted. 
 
 ---
 ### 🔗 Let's Connect
