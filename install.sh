@@ -5,7 +5,6 @@ echo "Deploying global dotfiles architecture..."
 # 1. Setup Starship Configuration
 mkdir -p ~/.config
 
-# Symlink directly to the persisted dotfiles so live edits are saved
 TARGET_FILE="/workspaces/.codespaces/.persistedshare/dotfiles/starship.toml"
 
 if [ -f "$TARGET_FILE" ]; then
@@ -19,4 +18,21 @@ if ! grep -q 'starship init bash' ~/.bashrc; then
   echo 'eval "$(starship init bash)"' >> ~/.bashrc
 fi
 
-echo "Dotfiles deployed."
+# 2. Force Install Global VS Code Extensions
+echo "Injecting full-stack C# and Azure extension stack..."
+
+# Chained installation for speed, running synchronously so the container doesn't kill it.
+code \
+  --install-extension ms-dotnettools.csharp \
+  --install-extension ms-dotnettools.csdevkit \
+  --install-extension ms-dotnettools.vscode-dotnet-runtime \
+  --install-extension ms-mssql.mssql \
+  --install-extension ms-mssql.data-workspace-vscode \
+  --install-extension ms-mssql.sql-database-projects-vscode \
+  --install-extension fabric.vscode-fabric \
+  --install-extension ms-azuretools.vscode-azureresourcegroups \
+  --install-extension ms-azuretools.vscode-azurestaticwebapps \
+  --install-extension ms-azuretools.vscode-azurefunctions \
+  --install-extension humao.rest-client
+
+echo "Dotfiles deployed. Environment fully weaponized."
